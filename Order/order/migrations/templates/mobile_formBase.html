@@ -1,0 +1,17 @@
+{% load staticfiles %}
+{% block beforeLogo %}
+{% endblock %}
+<div>
+    <img src="{%static "img/logo.png"%}">
+</div>
+<div style="width:100%">
+    <span style="font-weight:bold">Фишка</span>
+    <br>Такси Екатеринбург
+    <br>204-92-92
+</div>
+<div>
+    <a href="http://play.google.com/store/apps/details?id=ru.taximaster.tmtaxicaller.id1930"><img src="{%static "img/googleplay.png"%}" alt="GooglePlay"></a>
+    <a href="http://itunes.apple.com/ru/app/taksi-fiska/id996815032?mt=8"><img src="{%static "img/appstore.png"%}" alt="AppStore"></a>
+</div>
+{% block afterLogo %}
+{% endblock %}

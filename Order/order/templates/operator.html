@@ -1,0 +1,102 @@
+﻿{% load staticfiles %}
+<html style="overflow: auto">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Cache-Control" content="no-store" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Анкета оператора</title>
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="{%static "css/main.css"%}?cache=yes">
+		<script src="{%static "js/utils.js"%}?cache=yes"></script>
+        <script src="{%static "js/validation.js"%}?cache=yes"></script>
+    </head>
+    <body onload="bind_create_driver_button()">
+        <div class="page-drivers">
+			<div>
+				<div class="main-drivers" style="width: 315px">
+					<div class="logo">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="1" style="padding: 5px 0 6px 20px">
+                                    <img src="{%static "img/logo.png"%}" style="margin: 0">
+                                </td>
+                                <td align="center" style="color: white; font-size: 16px; padding: 1px 0 0 0; line-height: 1.5">
+                                    Такси Фишка
+                                    <br>Регистрация водителей
+                                </td>
+<!--                                 <td width="1" style="padding: 0 6px 0 0">
+                                    <img src="{%static "img/circle.png"%}" style="margin: 0">
+                                </td> -->
+                            </tr>
+                        </table>
+						<!-- <div style="width: 10px"><img src="{%static "img/logo.png"%}"></div>
+						<div style="display: inline-block">Такси Фишка<br>Регистрация водителей</div> -->
+					</div>
+					<form method="POST" action="#" onsubmit="return validate_new_driver()" id="newDriverForm" autocomplete="off">
+						{% csrf_token %}
+						<div class="text text-ms">
+							<input id="surname" name="surname" placeholder="Фамилия"/>
+						</div>
+						<div class="text text-ms">
+							<input id="firstname" name="firstname" placeholder="Имя"/>
+						</div>
+						<div class="text text-ms">
+							<input id="patronymic" name="patronymic" placeholder="Отчество"/>
+						</div>
+						<br>
+						<div class="text text-ms">
+							<input id="phone" name="phone" placeholder="Телефон"/>
+						</div>
+						<br>
+						<div class="text text-ms">
+							{%if cities%}
+								<select class="select-city" id="city" style="width:275px;height:28px">
+									{% for city in cities %}
+										<option {% if city.name == default %}selected="selected"{% endif %}>{{city.name}}</option>
+									{%endfor%}
+								</select>
+							{%endif%}
+						</div>
+						
+                        <div style="text-align: center">Для работы на нашем автомобиле,<br>заполнять поля ниже не требуется.</div>
+                        <br>
+						<div class="text text-ms">
+							<input id="mark" name="mark" placeholder="Марка"/>
+						</div>
+						<div class="text text-ms">
+							<input id="color" name="color" placeholder="Цвет"/>
+						</div>
+						<div class="text text-ms">
+							<input id="gosnumber" name="gosnumber" placeholder="Гос. номер"/>
+						</div>
+						<input class="send" type="button" value="Отправить заявку" id="submitButton" style="width:275px"/>
+                        <a style="text-decoration: none; text-align: center" href="#" onclick="javascript:back_to_main_page()"><div class="send-drivers">На главную</div></a>
+                        <a style="text-decoration: none; text-align: center" href="https://play.google.com/store/apps/details?id=ru.taximaster.www"><div class="send-tmdriver">TMDriver Android</div></a>
+                        <a style="text-decoration: none; text-align: center" href="https://itunes.apple.com/ru/app/tmdriver/id653338488?mt=8"><div class="send-tmdriver">TMDriver iOS</div></a>
+                        <a style="text-decoration: none; text-align: center" href="https://www.youtube.com/watch?v=8LmiQgwPTcI"><div class="send-tmdriver">TMDriver Инструкция</div></a>
+					</form>
+				</div>
+			</div>
+			<div class="notify" id="new_driver_notify_success" style="display:none">
+				<div class="notify-window">
+					<div class="notify-text" style="padding: 0 10px">Ваша заявка принята, ожидайте с вами свяжутся</div>
+					<form method="POST" action="#" onsubmit="return close_new_driver_success_notify()">
+						{% csrf_token %}
+						<input class="send-mini" type="submit" value="Ок" id="successButton"/>
+					</form>
+				</div>
+			</div>
+			<div class="notify" id="new_driver_notify_fail" style="display:none">
+				<div class="notify-window">
+					<div class="notify-text" style="color:red;padding: 0 10px">
+						Необходимо заполнить все поля
+					</div>
+					<form method="POST" action="#" onsubmit="return close_new_driver_fail_notify()">
+						{% csrf_token %}
+						<input class="send-mini" type="submit" value="Ок" id="successButton"/>
+					</form>
+				</div>
+			</div>
+        </div>
+    </body>
+</html>

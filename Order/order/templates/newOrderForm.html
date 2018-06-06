@@ -1,0 +1,70 @@
+﻿{% extends "formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+    <div class="main">
+        <div class="logo">
+{% endblock %}
+{% block afterLogo %}
+        </div>
+        <div>
+            {%if cities%}
+            <select class="select-city" id="cities-select" style="margin-bottom:12px">
+                {% for city in cities %}
+                <option {% if city.name == default %}selected="selected"{% endif %}>{{city.name_for_select}}</option>
+                {%endfor%}
+            </select>
+            {%endif%}
+            <form method="POST" action="#" onsubmit="return validate_new_order()" id="newOrderForm" autocomplete="off">
+                {% csrf_token %}
+                <div class="text text-ms">
+                    <input id="from_address" name="from_address" placeholder="Откуда" onkeyup="showClose(this)"/>
+                    <img id="from_address_clear" src="{%static "img/times.png"%}" style="display:none" onclick="var el=prev(this);el.value='';showClose(el);el.oninput()">
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="from_not_found_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Адрес не найден</div>
+                    </div>
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="from_empty_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Укажите откуда вас забрать</div>
+                    </div>
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="not_uniq_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Этот заказ уже создан</div>
+                    </div>
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="same_addresses_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Адрес подачи должен отличаться от адреса назначения</div>
+                    </div>
+                </div>
+                <div class="text">
+                    <input id="to_address_1" name="to_address_1" placeholder="Куда" onkeyup="showClose(this)"/>
+                    <img id="to_address_1_clear" src="{%static "img/times.png"%}" style="display:none" onclick="var el = prev(this); el.value = ''; showClose(el); el.oninput()">
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="to_empty_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Укажите куда поедете</div>
+                    </div>
+                    <div class="alert" style="margin:-20px 0 0 335px; display:none" id="to_not_found_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Адрес не найден</div>
+                    </div>
+                </div>
+                <div class="text">
+                    <input name="from_comment" placeholder="Подъезд или комментарий" id="comment" onkeyup="showClose(this)"/>
+                    <img id="comment_clear" src="{%static "img/times.png"%}" style="display:none" onclick="var el=prev(this);el.value='';showClose(el);el.oninput()">
+                </div>
+                <div class="text">
+                    <input id="phone" name ="phone" placeholder="Телефон" maxlength="12" style="width:125px" onkeyup="showClose(this)"/>
+                    <img id="phone_clear" src="{%static "img/times.png"%}" style="display:none; margin-left:159px" onclick="var el = prev(this); el.value = ''; showClose(el); el.oninput()">
+                    <div class="alert" style="margin:-20px 0 0 185px; display:none" id="phone_error">
+                        <div class="alert-triangle"></div>
+                        <div class="alert-text">Ошибка в номере</div>
+                    </div>
+                </div>
+                <input class="send" type="button" value="Заказать такси" id="submitButton"/>
+            </form>
+            <div id="sum" class="sum"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

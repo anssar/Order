@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<html style="overflow: auto">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Cache-Control" content="no-store" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="iel5c46w8vTs8kF7fyR3rpyRLAG9H1-tT7EXthDnKws" />
+        <meta name='wmail-verification' content='a0532548612f8a4514271a1f40897fd2' />
+        <meta name="description" content="Такси Фишка - Обратная связь">
+        <title>Такси Фишка - Обратная связь</title>
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="{%static "css/main.css"%}?cache=yes">
+		<script src="{%static "js/utils.js"%}?cache=yes"></script>
+        <script src="{%static "js/validation.js"%}?cache=yes"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-11453111-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+    <body onload="bind_feedback_button()">
+        <div class="page-drivers">
+			<div>
+				<div class="main-drivers" style="width: 315px">
+					<div class="logo">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="1" style="padding: 5px 0 6px 20px">
+                                    <img src="{%static "img/logo.png"%}" style="margin: 0">
+                                </td>
+                                <td align="center" style="color: white; font-size: 16px; padding: 1px 0 0 0; line-height: 1.5">
+                                    Такси Фишка
+                                    <br>Обратная связь
+                                </td>
+                            </tr>
+                        </table>
+					</div>
+					<form method="POST" action="#" onsubmit="return validate_feedback()" id="feedbackForm" autocomplete="off">
+						{% csrf_token %}
+						<div class="text text-ms">
+							<input id="firstname" name="firstname" placeholder="Имя"/>
+						</div>
+						<!-- <br> -->
+						<div class="text text-ms">
+							<input id="phone" name="phone" placeholder="Телефон"/>
+						</div>
+						<br>
+            <div class="text text-ms">
+							<textarea id="message" name="message" placeholder="Содержание" rows="10"/></textarea>
+            </div>
+						<input class="send" type="button" value="Отправить" id="submitButton" style="width:275px"/>
+            <a style="text-decoration: none; text-align: center" href="#" onclick="javascript:back_to_main_page2()"><div class="send-drivers">На главную</div></a>
+					</form>
+				</div>
+			</div>
+			<div class="notify" id="feedback_notify_success" style="display:none">
+				<div class="notify-window">
+					<div class="notify-text" style="padding: 0 10px">Спасибо за ваш отзыв</div>
+					<form method="POST" action="#" onsubmit="return close_feedback_success_notify()">
+						{% csrf_token %}
+						<input class="send-mini" type="submit" value="Ок" id="successButton"/>
+					</form>
+				</div>
+			</div>
+			<div class="notify" id="feedback_notify_fail" style="display:none">
+				<div class="notify-window">
+					<div class="notify-text" style="color:red;padding: 0 10px">
+						Необходимо заполнить телефон
+					</div>
+					<form method="POST" action="#" onsubmit="return close_feedback_fail_notify()">
+						{% csrf_token %}
+						<input class="send-mini" type="submit" value="Ок" id="successButton"/>
+					</form>
+				</div>
+			</div>
+        </div>
+    </body>
+</html>

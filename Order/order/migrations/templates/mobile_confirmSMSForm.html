@@ -1,0 +1,37 @@
+﻿{% extends "mobile_formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+	<div class="main">
+		<div class="logo">
+{% endblock %}
+{% block afterLogo %}
+		</div>
+		<div>
+			<div class="list-header">Подтвердите телефон</div>
+			<div style="margin-top:15px">Введите код, отправленный на номер <span id="phone_place" class="list-main">{{phone}}</span></div>
+			<form method="POST" action="#" onsubmit="return validate_sms_code()" id="confirmSMSForm">
+				{% csrf_token %}
+				<div class="text" style="display: inline-block">
+					<input id="sms_code" name="sms_code" placeholder="Введите код из СМС" style="display:inline-block; width:150px; margin:20px 5px 15px 0" onkeyup="showClose(this)" autocomplete="off"/>
+					<img src="{%static "img/times.png"%}" style="display:none; margin:-35px 0 0 164px" onclick="var el = prev(this); el.value = ''; showClose(el); el.oninput()">
+					<div class="alert" style="margin:-35px 0 0 188px; display: none" id="wrong_code_error">
+						<div class="alert-triangle"></div>
+						<div class="alert-text alert-text-ms">Неверный код подтверждения</div>
+					</div>
+				</div>
+				<div class="send-mini-inactive" style="display:inline" id="inactiveSubmitButton">Подтвердить</div>
+				<input class="send-mini" type="button" value="Подтвердить" id="submitButton" style="display:none"/>
+				<div id="resend_div">
+					<div class="sms"><a href="javascript:resendSMS();">Отправить код ещё раз</a></div>
+					<div style="margin-top:15px">Осталось попыток: <span id="attempt_count">{{attempt}}</span></div>
+				</div>
+			</form>
+			<form method="POST" action="#" onsubmit="return show_notify()">
+				{% csrf_token %}
+				<input class="cancel" type="submit" value="Отменить заказ" id="cancelButton"/>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+﻿{% extends "formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+	<div class="main">
+		<div class="logo">
+{% endblock %}
+{% block afterLogo %}
+		</div>
+		<div class="list">
+			<div class="list-header">Клиент в пути</div>
+			<p>Автомобиль: <span class="list-main" id="car_place">{{color}} {{mark}} {{model}} {{gos_number}}</span></p>
+			<p>Связь с водителем: <span>8(343)342-21-00</span></p>
+			<p>Цена: <span class="list-main" id="sum_place">{{sum}}</span><span class="list-main"> руб.</span></p>
+		</div>
+	</div>
+</div>
+{% endblock %}

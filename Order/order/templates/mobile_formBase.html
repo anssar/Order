@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% block beforeLogo %}
+{% endblock %}
+<div>
+    <img src="{%static "img/logo_m.png"%}">
+</div>
+<div style="width:100%">
+    <span style="font-size: 24px">Фишка</span>
+    <br>
+    <!--<div id="city-name-header">
+    {%if city_name%}
+    {{city_name}}
+    {%endif%}
+    </div>
+    <br>
+    <div id="city-taxi-phone-header">
+    {%if city_taxi_phone%}
+    {{city_taxi_phone}}
+    {%endif%}
+    </div>-->
+</div>
+<div>
+    <a href="http://t.me/taxifishkabot"><img src="{%static "img/telegram_m.png"%}" alt="Телеграм"></a>
+    <a href="http://play.google.com/store/apps/details?id=ru.taximaster.tmtaxicaller.id1930"><img src="{%static "img/googleplay.png"%}" alt="GooglePlay"></a>
+    <a href="http://itunes.apple.com/ru/app/taksi-fiska/id996815032?mt=8"><img src="{%static "img/appstore.png"%}" alt="AppStore"></a>
+</div>
+{% block afterLogo %}
+{% endblock %}

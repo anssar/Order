@@ -1,0 +1,79 @@
+﻿{% extends "mobile_formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+    <div class="logo">
+{% endblock %}
+{% block afterLogo %}
+    </div>
+    {%if cities%}
+    <select class="select-city" id="cities-select">
+    {% for city in cities %}
+    <option {% if city.name == default %}selected="selected"{% endif %}>{{city.name_for_select}}</option>
+    {%endfor%}
+    </select>
+    {%endif%}
+    <form method="POST" action="#" onsubmit="return validate_new_order()" id="newOrderForm" autocomplete="off">
+        {% csrf_token %}
+        <div class="field">
+            <input id="from_address" name="from_address" placeholder="Откуда" onkeyup="showClose(this)"/>
+            <div id="from_address_clear" style="display:none" onclick="var el=prev(this);el.value='';showClose(el);el.oninput()">
+                <div></div>
+                <div></div>
+            </div>
+            <div id="from_not_found_error">
+                <div></div>
+                <div>Адрес не найден</div>
+            </div>
+            <div id="from_empty_error">
+                <div></div>
+                <div>Укажите откуда вас забрать</div>
+            </div>
+            <div id="not_uniq_error">
+                <div></div>
+                <div>Этот заказ уже создан</div>
+            </div>
+            <div id="same_addresses_error">
+                <div></div>
+                <div>Адрес подачи должен отличаться от адреса назначения</div>
+            </div>
+        </div>
+        <div class="field">
+            <input id="to_address_1" name="to_address_1" placeholder="Куда" onkeyup="showClose(this)"/>
+            <div id="to_address_1_clear" style="display:none" onclick="var el = prev(this); el.value = ''; showClose(el); el.oninput()">
+                <div></div>
+                <div></div>
+            </div>
+            <div id="to_empty_error">
+                <div></div>
+                <div>Укажите куда поедете</div>
+            </div>
+            <div id="to_not_found_error">
+                <div></div>
+                <div>Адрес не найден</div>
+            </div>
+        </div>
+        <div class="field">
+            <input name="from_comment" placeholder="Подъезд или комментарий" id="comment" onkeyup="showClose(this)"/>
+            <div id="comment_clear" style="display:none" onclick="var el=prev(this);el.value='';showClose(el);el.oninput()">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="field">
+            <input id="phone" name ="phone" placeholder="Телефон" maxlength="12" onkeyup="showClose(this)"/>
+            <div id="phone_clear" style="display:none" onclick="var el = prev(this); el.value = ''; showClose(el); el.oninput()">
+                <div></div>
+                <div></div>
+            </div>
+            <div id="phone_error">
+                <div></div>
+                <div>Ошибка в номере</div>
+            </div>
+        </div>
+        <div id="sum" class="sum"></div>
+        <input type="button" value="Вызвать такси" id="submitButton"/>
+    </form>
+</div>
+<a href="/to-full-version" style="text-decoration:none; color:#A9A9A9; position:absolute; margin-top:91px"><div class="toFullVersionDiv" style="float:left">Полная версия</div></a><br><br>
+{% endblock %}

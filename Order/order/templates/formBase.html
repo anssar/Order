@@ -1,0 +1,36 @@
+{% load staticfiles %}
+{% block beforeLogo %}
+{% endblock %}
+
+<!-- <div><img src="{%static "img/logo_9maya.png"%}"></div>
+<div style="text-align: center">Такси Фишка</div>
+<div><img src="{%static "img/circle.png"%}"></div> -->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="1" style="padding: 5px 0 6px 20px">
+            <img src="{%static "img/logo.png"%}" style="margin: 0">
+        </td>
+        <td align="center" style="color: white; font-size: 24px; padding: 1px 0 0 0">
+            Фишка
+        </td>
+<!--         <td width="1" style="padding: 0 6px 0 0">
+            <img src="{%static "img/newyear.png"%}" style="margin: 0">
+        </td> -->
+    </tr>
+</table>
+
+<!-- <div id="city-name-header" style="font-size: 12px">
+    {%if city_name%}
+    {{city_name}}
+    {%endif%}
+</div>
+
+<div id="city-taxi-phone-header" style="font-size: 12px">
+    {%if city_taxi_phone%}
+    {{city_taxi_phone}}
+    {%endif%}
+</div> -->
+
+{% block afterLogo %}
+{% endblock %}

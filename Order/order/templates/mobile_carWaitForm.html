@@ -1,0 +1,23 @@
+﻿{% extends "mobile_formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+	<div class="main">
+		<div class="logo">
+{% endblock %}
+{% block afterLogo %}
+		</div>
+		<div class="list">
+			<div class="list-header">Автомобиль ожидает вас</div>
+			<div class="list-address" id="from_address_place"><span>{{from_address}}</span></div>
+			<p>Автомобиль: <span class="list-main" id="car_place">{{color}} {{mark}} {{model}} {{gos_number}}</span></p>
+			<p>Связь с водителем: <span class="list-main"  id="city-taxi-phone-header">{%if city_taxi_phone%}{{city_taxi_phone}}{%endif%}</span></p>
+			<p>Цена: <span class="list-main" id="sum_place">{{sum}}</span></p>
+			<form method="POST" action="#" onsubmit="return show_notify()">
+				{% csrf_token %}
+				<input class="cancel" type="submit" value="Отменить заказ" id="cancelButton"/>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

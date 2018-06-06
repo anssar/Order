@@ -1,0 +1,21 @@
+﻿{% extends "mobile_formBase.html" %}
+{% load staticfiles %}
+{% block beforeLogo %}
+<div>
+	<div class="main">
+		<div class="logo">
+{% endblock %}
+{% block afterLogo %}
+		</div>
+		<div class="list">
+			<div class="list-header">Идёт поиск автомобиля</div>
+			<div class="list-address"> <span id="from_address_place">{{from_address}}</span></div>
+			<div>Ожидайте СМС или звонок на номер <span id="phone_place">{{phone}}</span></div>
+			<form method="POST" action="#" onsubmit="return show_notify()">
+				{% csrf_token %}
+				<input class="cancel" type="submit" value="Отменить заказ" id="cancelButton"/>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

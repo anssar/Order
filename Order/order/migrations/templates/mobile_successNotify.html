@@ -1,0 +1,10 @@
+﻿{% load staticfiles %}
+<div class="notify" id="notify_success">
+	<div class="notify-window">
+		<div class="notify-text">Ваш заказ выполнен!</div>
+		<form method="POST" action="#" onsubmit="return reinit()">
+			{% csrf_token %}
+			<input class="send-mini" type="submit" value="Спасибо" id="successButton"/>
+		</form>
+	</div>
+</div>

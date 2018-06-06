@@ -1,0 +1,46 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Такси Екатеринбург, ЖД вокзал, Аэропорт, Уралмаш, Эльмаш, Сортировка, Юго-Запад">
+        <meta name="keywords" content="#таксиекатеринбург">
+        <title>Такси Фишка</title>
+        <link rel="shortcut icon" href="{%static "img/favicon.png"%}">
+        <link rel="stylesheet" type="text/css" href="{%static "css/mobile.css"%}">
+        <link rel="stylesheet" type="text/css" href="{%static "js/jq/jquery-ui.css"%}">
+        <script src="{%static "js/ajax.js"%}"></script>
+        <script src="{%static "js/clear.js"%}"></script>
+        <script src="{%static "js/mapController.js"%}"></script>
+        <script src="{%static "js/search.js"%}"></script>
+        <script src="{%static "js/utils.js"%}"></script>
+        <script src="{%static "js/validation.js"%}"></script>
+        <script src="{%static "js/jq/jquery.js"%}"></script>
+        <script src="{%static "js/jq/jquery-ui.js"%}"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-11453111-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+    <body onload="init();">
+        <div class="page">
+            <div id="form_place"></div>
+        </div>
+        <div class="notify" style="display:none" id="notify">
+            <div class="notify-window">
+                <div class="notify-close" id="notify-close"><img src="{%static "img/times.png"%}"></div>
+                <div class="notify-text">Отменить заказ?</div>
+                <form method="POST" action="#" onsubmit="return validate_cancel()">
+                    {% csrf_token %}
+                    <input class="send-mini" type="submit" value="Да, отменить" id="cancelButton"/>
+                </form>
+            </div>
+        </div>
+        <div id="result_notify_place"></div>
+    </body>
+</html>

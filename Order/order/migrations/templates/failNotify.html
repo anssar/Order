@@ -1,0 +1,10 @@
+﻿{% load staticfiles %}
+<div class="notify" id="notify_fail">
+	<div class="notify-window">
+		<div class="notify-text" style="color:red">Ваш заказ отменён...</div>
+		<form method="POST" action="#" onsubmit="return reinit()">
+			{% csrf_token %}
+			<input class="send-mini" type="submit" value="Очень жаль" id="failButton"/>
+		</form>
+	</div>
+</div>
